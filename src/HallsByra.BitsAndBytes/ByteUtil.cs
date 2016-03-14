@@ -26,6 +26,9 @@ namespace HallsByra.BitsAndBytes
             return BitConverter.GetBytes(value);
         }
 
+
+        // TODO: Rework the following to IEnumerable extensions instead.
+
         /// <summary>
         /// Converts a string of hex bytes to a binary byte array.
         /// </summary>

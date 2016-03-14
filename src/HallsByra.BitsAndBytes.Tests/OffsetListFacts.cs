@@ -2,6 +2,7 @@
 using System.Linq;
 using HallsByra.BitsAndBytes;
 using Xunit;
+using FluentAssertions;
 
 namespace Areff.Swapar.Core.Tests.BitsAndBytes
 {
@@ -24,7 +25,7 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
                 var offsetList = bytes.Offset(offset);
 
                 // Then
-                Assert.Equal(expectedCount, offsetList.Count);
+                offsetList.Count().Should().Be(expectedCount);
             }
         }
 
@@ -44,7 +45,7 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
                 offsetList[0] = 0xFF;
 
                 // Then
-                Assert.Equal(0xFF, bytes[offset]);
+                bytes[offset].Should().Be(0xFF);
             }
 
             [Theory]
@@ -58,7 +59,7 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
                 var offsetList = bytes.Offset(offset);
 
                 // Then
-                Assert.Equal(offset, offsetList[0]);
+                offsetList[0].Should().Be((byte)offset);
             }
         }
 
@@ -77,7 +78,7 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             mifareBlock.Offset(10).Apply(ByteUtil.HexStringToByteArray(bKey));
 
             // Then
-            Assert.True(mifareBlock.SequenceEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0xFF, 0x07, 0x80, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66 }));
+            mifareBlock.Should().Equal(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0xFF, 0x07, 0x80, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66 });
         }
    
     }

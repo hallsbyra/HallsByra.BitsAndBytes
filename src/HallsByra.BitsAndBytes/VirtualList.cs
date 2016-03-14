@@ -7,6 +7,8 @@ namespace HallsByra.BitsAndBytes
 {
     /// The virtual list acts as a facade over one ore more other lists in sequence. Requests to the virtual list is routed to 
     /// one of the underlying lists.
+    /// 
+    /// TODO: Rework into a pure binary tree implementation. Each VirtualList should hold only two sublists.
     public class VirtualList<T> : IList<T>
     {
         private readonly IList<T>[] backingLists;

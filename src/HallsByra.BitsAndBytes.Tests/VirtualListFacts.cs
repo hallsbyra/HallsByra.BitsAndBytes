@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using HallsByra.BitsAndBytes;
+using Xunit;
+using FluentAssertions;
 
 namespace Areff.Swapar.Core.Tests.BitsAndBytes
 {
-/*
-    [TestClass]
-    public class VirtualList_should
+    public class VirtualListFacts
     {
-        [TestMethod]
+        [Fact]
         public void read_indexed_correctly_into_two_combined_lists()
         {
             // Given
@@ -19,13 +19,14 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             var combined = bytes1.Combine(bytes2);
 
             // Then
-            Assert.AreEqual(0x01, combined[0]);
-            Assert.AreEqual(0x02, combined[1]);
-            Assert.AreEqual(0x03, combined[2]);
-            Assert.AreEqual(0x04, combined[3]);
+            combined.Count.Should().Be(4);
+            combined[0].Should().Be(0x01);
+            combined[1].Should().Be(0x02);
+            combined[2].Should().Be(0x03);
+            combined[3].Should().Be(0x04);
         }
 
-        [TestMethod]
+        [Fact]
         public void write_indexed_correctly_into_two_combined_lists()
         {
             // Given
@@ -40,13 +41,13 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             combined[3] = 0x13;
 
             // Then
-            Assert.AreEqual(0x10, combined[0]);
-            Assert.AreEqual(0x11, combined[1]);
-            Assert.AreEqual(0x12, combined[2]);
-            Assert.AreEqual(0x13, combined[3]);
+            combined[0].Should().Be(0x10);
+            combined[1].Should().Be(0x11);
+            combined[2].Should().Be(0x12);
+            combined[3].Should().Be(0x13);
         }
 
-        [TestMethod]
+        [Fact]
         public void index_correctly_into_four_combined_lists()
         {
             // Given
@@ -63,11 +64,10 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             }
 
             // Then
-            Assert.IsTrue(combined.ToArray().SequenceEqual(new byte[] { 0x02, 0x03, 0x04 }));
-
+            combined.Should().Equal(0x02, 0x03, 0x04);
         }
 
-        [TestMethod]
+        [Fact]
         public void report_count_correctly_of_two_combined_lists()
         {
             // Given
@@ -78,11 +78,11 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             var combined = bytes1.Combine(bytes2);
 
             // Then
-            Assert.AreEqual(5, combined.Count);
+            combined.Count.Should().Be(5);
         }
 
 
-        [TestMethod]
+        [Fact]
         public void report_indexof_correctly_of_two_combined_lists()
         {
             // Given
@@ -93,10 +93,10 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             var combined = bytes1.Combine(bytes2);
 
             // Then
-            Assert.AreEqual(2, combined.IndexOf(0x03));
+            combined.IndexOf(0x03).Should().Be(2);
         }
 
-        [TestMethod]
+        [Fact]
         public void iterate_over_two_combined_lists()
         {
             // Given
@@ -107,8 +107,7 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             var allElements = bytes1.Combine(bytes2).ToArray();
 
             // Then
-            Assert.IsTrue(allElements.SequenceEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }));
+            allElements.Should().Equal(0x01, 0x02, 0x03, 0x04, 0x05);
         }
     }
-    */
 }

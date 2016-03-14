@@ -70,7 +70,7 @@ Task("Get-GitVersion")
 
 Task("Pack-NuGet")
     .IsDependentOn("Get-GitVersion")
-    //.IsDependentOn("Build")
+    .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
     var settings = new NuGetPackSettings() {
