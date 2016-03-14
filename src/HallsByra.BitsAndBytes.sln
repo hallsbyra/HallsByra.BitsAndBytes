@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallsByra.BitsAndBytes", "HallsByra.BitsAndBytes\HallsByra.BitsAndBytes.csproj", "{EAA54038-568B-4797-90AA-E1B7139BC62C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallsByra.BitsAndBytes.Tests", "HallsByra.BitsAndBytes.Tests\HallsByra.BitsAndBytes.Tests.csproj", "{11C2F884-002A-4C67-8125-6A8D4FE7634D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAA54038-568B-4797-90AA-E1B7139BC62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAA54038-568B-4797-90AA-E1B7139BC62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAA54038-568B-4797-90AA-E1B7139BC62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAA54038-568B-4797-90AA-E1B7139BC62C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C2F884-002A-4C67-8125-6A8D4FE7634D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C2F884-002A-4C67-8125-6A8D4FE7634D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C2F884-002A-4C67-8125-6A8D4FE7634D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C2F884-002A-4C67-8125-6A8D4FE7634D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
