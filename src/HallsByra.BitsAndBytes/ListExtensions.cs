@@ -32,33 +32,29 @@ namespace HallsByra.BitsAndBytes
 
     public static class ByteListExtensions
     {
-        public static bool GetBool(this IList<byte> list, int startBit, int bitCount) => list.ToBitList().GetBool(startBit, bitCount);
-        public static void SetBool(this IList<byte> list, bool value, int startBit, int bitCount) => list.ToBitList().SetBool(value, startBit, bitCount);
-        public static byte GetByte(this IList<byte> list, int startBit, int bitCount) => list.ToBitList().GetByte(startBit, bitCount);
-        public static void SetByte(this IList<byte> list, byte value, int startBit, int bitCount) => list.ToBitList().SetByte(value, startBit, bitCount);
-        public static UInt16 GetUInt16(this IList<byte> list, int startBit, int bitCount) => list.ToBitList().GetUInt16(startBit, bitCount);
-        public static void SetUInt16(this IList<byte> list, UInt16 value, int startBit, int bitCount) => list.ToBitList().SetUInt16(value, startBit, bitCount);
-        public static UInt32 GetUInt32(this IList<byte> list, int startBit, int bitCount) => list.ToBitList().GetUInt32(startBit, bitCount);
-        public static void SetUInt32(this IList<byte> list, UInt32 value, int startBit, int bitCount) => list.ToBitList().SetUInt32(value, startBit, bitCount);
+        public static UInt16 GetUInt16(this IList<byte> list, int startByte) => list.Offset(startByte).ToUInt16();        
+        public static void SetUInt16(this IList<byte> list, ushort value, int startByte) => list.Offset(startByte).Apply(value.ToBytes());
+        public static UInt32 GetUInt32(this IList<byte> list, int startByte, int byteCount = 4) => list.Offset(startByte).Take(byteCount).ToUInt32();
+        public static void SetUInt32(this IList<byte> list, uint value, int startByte, int byteCount = 4) => list.Offset(startByte).Apply(value.ToBytes().Take<byte>(byteCount));
     }
 
     public static class BitListExtensions
     {
-        public static bool GetBool(this IList<bool> list, int startBit, int bitCount)
+        public static bool GetBool(this IList<bool> list, int startBit, int bitCount = 1)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount == 1, "bitCount must be 1 for bools");
             return list[startBit];
         }
 
-        public static void SetBool(this IList<bool> list, bool value, int startBit, int bitCount)
+        public static void SetBool(this IList<bool> list, bool value, int startBit, int bitCount = 1)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount == 1, "bitCount must be 1 for bools");
             list[startBit] = value;
         }
 
-        public static byte GetByte(this IList<bool> list, int startBit, int bitCount)
+        public static byte GetByte(this IList<bool> list, int startBit, int bitCount = 8)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount > 0, "bitCount must be positive");
@@ -66,15 +62,15 @@ namespace HallsByra.BitsAndBytes
             return list.Offset(startBit).Take(bitCount).ToByte();
         }
 
-        public static void SetByte(this IList<bool> list, byte value, int startBit, int bitCount)
+        public static void SetByte(this IList<bool> list, byte value, int startBit, int bitCount = 8)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount > 0, "bitCount must be positive");
             Debug.Assert(bitCount <= 8, "a byte must be maximum 8 bits");
-            list.Offset(startBit).Apply(value.ToBits(bitCount));
+            list.Offset(startBit).Apply(value.ToBits().Take(bitCount));
         }
 
-        public static UInt16 GetUInt16(this IList<bool> list, int startBit, int bitCount)
+        public static UInt16 GetUInt16(this IList<bool> list, int startBit, int bitCount = 16)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount > 0, "bitCount must be positive");
@@ -82,15 +78,15 @@ namespace HallsByra.BitsAndBytes
             return list.Offset(startBit).Take(bitCount).ToUInt16();
         }
 
-        public static void SetUInt16(this IList<bool> list, UInt16 value, int startBit, int bitCount)
+        public static void SetUInt16(this IList<bool> list, UInt16 value, int startBit, int bitCount = 16)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount > 0, "bitCount must be positive");
             Debug.Assert(bitCount <= 16, "a UInt16 must be maximum 16 bits");
-            list.Offset(startBit).Apply(value.ToBits(bitCount));
+            list.Offset(startBit).Apply(value.ToBits().Take(bitCount));
         }
 
-        public static UInt32 GetUInt32(this IList<bool> list, int startBit, int bitCount)
+        public static UInt32 GetUInt32(this IList<bool> list, int startBit, int bitCount = 32)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount > 0, "bitCount must be positive");
@@ -98,12 +94,12 @@ namespace HallsByra.BitsAndBytes
             return list.Offset(startBit).Take(bitCount).ToUInt32();
         }
 
-        public static void SetUInt32(this IList<bool> list, UInt32 value, int startBit, int bitCount)
+        public static void SetUInt32(this IList<bool> list, UInt32 value, int startBit, int bitCount = 32)
         {
             Debug.Assert(startBit >= 0, "startBit must be positive");
             Debug.Assert(bitCount > 0, "bitCount must be positive");
             Debug.Assert(bitCount <= 32, "a UInt32 must be maximum 32 bits");
-            list.Offset(startBit).Apply(value.ToBits(bitCount));
+            list.Offset(startBit).Apply(value.ToBits().Take(bitCount));
         }
     }
 

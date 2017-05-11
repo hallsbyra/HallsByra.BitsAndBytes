@@ -6,88 +6,45 @@ namespace HallsByra.BitsAndBytes
 {
     public static class BitUtil
     {
-        public static IEnumerable<bool> ToBits(this UInt64 value, int bitCount)
+        public static IEnumerable<bool> ToBits(this UInt64 value)
         {
-            for (int bit = 0; bit < bitCount; bit++)
+            for (int bit = 0; bit < 64; bit++)
             {
                 yield return (value & 1) == 1;
                 value >>= 1;
             }
         }
 
-        public static IEnumerable<bool> ToBits(this byte value, int bitCount)
-        {
-            return ((UInt64)value).ToBits(bitCount);
-        }
-
         public static IEnumerable<bool> ToBits(this byte value)
         {
-            return ((UInt64)value).ToBits(8);
-        }
-
-        public static IEnumerable<bool> ToBits(this UInt16 value, int bitCount)
-        {
-            return ((UInt64)value).ToBits(bitCount);
+            return ((UInt64)value).ToBits().Take(8);
         }
 
         public static IEnumerable<bool> ToBits(this UInt16 value)
         {
-            return ((UInt64)value).ToBits(16);
+            return ((UInt64)value).ToBits().Take(16);
         }
 
-        public static IEnumerable<bool> ToBits(this UInt32 value, int bitCount)
-        {
-            return ((UInt64)value).ToBits(bitCount);
-        }
 
         public static IEnumerable<bool> ToBits(this UInt32 value)
         {
-            return ((UInt64)value).ToBits(32);
+            return ((UInt64)value).ToBits().Take(32);
         }
 
-        public static IEnumerable<bool> ToBits(this Int32 value, int bitCount)
-        {
-            return ((UInt64)value).ToBits(bitCount);
-        }
 
         public static IEnumerable<bool> ToBits(this Int32 value)
         {
-            return ((UInt64)value).ToBits(32);
-        }
-
-        public static IEnumerable<bool> ToBits(this bool value, int bitCount)
-        {
-            yield return value;
-            for (int index = 1; index < bitCount; index++)
-            {
-                yield return false;
-            }
+            return ((UInt64)value).ToBits().Take(32);
         }
 
         public static IEnumerable<bool> ToBits(this bool value)
         {
-            return value.ToBits(1);
-        }
-
-        public static IEnumerable<bool> ToBits(this byte[] value, int bitCount)
-        {
-            int currentByteIndex = 0;
-            while (bitCount > 0)
-            {
-                var currentByte = currentByteIndex < value.Length ? value[currentByteIndex] : 0;
-                var bitsToReturnInCurrentByte = Math.Min(bitCount, 8);
-                foreach (var bit in currentByte.ToBits(bitsToReturnInCurrentByte))
-                {
-                    yield return bit;
-                }
-                bitCount -= 8;
-                currentByteIndex++;
-            }
+            yield return value;
         }
 
         public static IEnumerable<bool> ToBits(this byte[] value)
         {
-            return value.ToBits(value.Length * 8);
+            return value.SelectMany(b => b.ToBits());
         }
 
         public static UInt64 ToUInt64(this IEnumerable<bool> bits)

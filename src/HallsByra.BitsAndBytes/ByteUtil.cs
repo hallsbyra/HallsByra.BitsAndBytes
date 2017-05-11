@@ -26,6 +26,11 @@ namespace HallsByra.BitsAndBytes
             return BitConverter.GetBytes(value);
         }
 
+        public static IEnumerable<byte> ToBytes(this UInt64 value)
+        {
+            return BitConverter.GetBytes(value);
+        }
+
 
         // TODO: Rework the following to IEnumerable extensions instead.
 

@@ -16,17 +16,16 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
         [InlineData(3, 2, "11")]
         public void convert_int32_to_bits(int value, int bitCount, string expectedBitString)
         {
-            value.ToBits(bitCount).ToBinaryString().Should().Be(expectedBitString);
+            value.ToBits().Take(bitCount).ToBinaryString().Should().Be(expectedBitString);
         }
 
         [Theory]
         [InlineData(new byte[] { 1, 2 }, 16, "10000000" + "01000000")]
         [InlineData(new byte[] { 1, 2 }, 10, "10000000" + "01")]
         [InlineData(new byte[] { 1, 2 },  8, "10000000")]
-        [InlineData(new byte[] { 1, 2 }, 18, "10000000" + "01000000" + "00")]
         public void convert_byte_array_to_bits(byte[] bytes, int bitCount, string expectedBitString)
         {
-            bytes.ToBits(bitCount).ToBinaryString().Should().Be(expectedBitString);
+            bytes.ToBits().Take(bitCount).ToBinaryString().Should().Be(expectedBitString);
         }
 
         [Theory]

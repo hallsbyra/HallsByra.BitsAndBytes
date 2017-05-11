@@ -57,7 +57,7 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             var bits = bytes.ToBitList();
 
             // When
-            bits.Apply(0xF0.ToBits(8));
+            bits.Apply(((byte)0xF0).ToBits());
 
             // Then
             bytes[0].Should().Be(0xF0);
@@ -71,7 +71,7 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             var bits = bytes.ToBitList();
 
             // When
-            bits.Offset(4).Apply(0xF.ToBits(4));
+            bits.Offset(4).Apply(0xF.ToBits().Take(4));
 
             // Then
             bytes[0].Should().Be(0xF0);
