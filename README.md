@@ -5,6 +5,10 @@ LINQ-ish bit/byte manipulation in C#
 
 ## Changelog
 
+## 2.0.1
+### Changes
+- Removed dependency to GitVersionTask.
+
 ## 2.0.0
 ### Changes
 - Migrated to .NET Standard.
