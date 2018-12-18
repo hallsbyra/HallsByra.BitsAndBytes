@@ -5,6 +5,10 @@ LINQ-ish bit/byte manipulation in C#
 
 ## Changelog
 
+## 2.1.0
+- Added ```IEnumerable<byte>.ToUInt64()```
+- Updated dependencies
+
 ## 2.0.1
 ### Changes
 - Removed dependency to GitVersionTask.

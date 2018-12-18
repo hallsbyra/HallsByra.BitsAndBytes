@@ -8,12 +8,17 @@ namespace HallsByra.BitsAndBytes
     {
         public static UInt16 ToUInt16(this IEnumerable<byte> bytes)
         {
-            return BitConverter.ToUInt16(bytes.Take(2).ToArray(), 0);
+            return BitConverter.ToUInt16(bytes.PadRight(2).ToArray(), 0);
         }
 
         public static UInt32 ToUInt32(this IEnumerable<byte> bytes)
         {
-            return BitConverter.ToUInt32(bytes.Take(4).ToArray(), 0);
+            return BitConverter.ToUInt32(bytes.PadRight(4).ToArray(), 0);
+        }
+
+        public static UInt64 ToUInt64(this IEnumerable<byte> bytes)
+        {
+            return BitConverter.ToUInt64(bytes.PadRight(8).ToArray(), 0);
         }
 
         public static IEnumerable<byte> ToBytes(this UInt16 value)

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using FluentAssertions;
 using HallsByra.BitsAndBytes;
+using System;
 using Xunit;
-using FluentAssertions;
 
 namespace Areff.Swapar.Core.Tests.BitsAndBytes
 {
@@ -77,5 +76,26 @@ namespace Areff.Swapar.Core.Tests.BitsAndBytes
             arr2.Should().Equal(new byte[] { 0xFF });
             target.Should().Equal(new byte[] { 0x00 });
         }
+
+        [Theory]
+        [InlineData(new byte[] { 0x01 }, 0x01)]
+        [InlineData(new byte[] { 0x01, 0x00, 0x00 }, 0x01)]
+        [InlineData(new byte[] { 0x12, 0x34, 0x56 }, 0x563412)]
+        [InlineData(new byte[] { 0x12, 0x34, 0x56, 0x78 }, 0x78563412)]
+        [InlineData(new byte[] { 0x12, 0x34, 0x56, 0x78, 0x9A }, 0x78563412)]
+        public void convert_bytes_to_UInt32(byte[] bytes, UInt32 expected)
+        {
+            bytes.ToUInt32().Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData(new byte[] { 0x01 }, 0x01L)]
+        [InlineData(new byte[] { 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, 0x01L)]
+        [InlineData(new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF }, 0xEFCDAB8967452301L)]
+        public void convert_bytes_to_UInt64(byte[] bytes, UInt64 expected)
+        {
+            bytes.ToUInt64().Should().Be(expected);
+        }
+
     }
 }

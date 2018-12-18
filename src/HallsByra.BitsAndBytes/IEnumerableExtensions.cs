@@ -31,5 +31,17 @@ namespace HallsByra.BitsAndBytes
             foreach (var element in source)
                 action(element);
         }
+
+        public static IEnumerable<T> PadRight<T>(this IEnumerable<T> source, int length)
+        {
+            int i = 0;
+            foreach(var item in source.Take(length)) 
+            {
+                yield return item;
+                i++;
+            }
+            for( ; i < length; i++)
+                yield return default(T);
+        }
     }
 }
